@@ -8,4 +8,5 @@ require (
 	github.com/Jeffail/gabs/v2 v2.6.0
 	github.com/sirupsen/logrus v1.7.0
 	github.com/stretchr/testify v1.5.1 // indirect
+	gopkg.in/tucnak/telebot.v2 v2.3.5
 )
