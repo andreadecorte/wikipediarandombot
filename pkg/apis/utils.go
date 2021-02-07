@@ -16,6 +16,8 @@ func getConnection(uri string) ([]byte, int, error) {
 		return nil, 0, err
 	}
 
+
+	
 	res, err := client.Do(req)
 	if err != nil {
 		return nil, res.StatusCode, err
