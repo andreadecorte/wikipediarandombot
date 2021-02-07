@@ -1,0 +1,41 @@
+{
+    "batchcomplete": "",
+    "continue": {
+        "grncontinue": "0.000946724996|0.000946806653|24273193|0",
+        "continue": "grncontinue||"
+    },
+    "query": {
+        "pages": {
+            "45165641": {
+                "pageid": 45165641,
+                "ns": 0,
+                "title": "Kraven the Hunter (Ana Kravinoff)",
+                "contentmodel": "wikitext",
+                "pagelanguage": "en",
+                "pagelanguagehtmlcode": "en",
+                "pagelanguagedir": "ltr",
+                "touched": "2021-02-05T22:01:14Z",
+                "lastrevid": 991141207,
+                "length": 9352,
+                "fullurl": "https://en.wikipedia.org/wiki/Kraven_the_Hunter_(Ana_Kravinoff)",
+                "editurl": "https://en.wikipedia.org/w/index.php?title=Kraven_the_Hunter_(Ana_Kravinoff)&action=edit",
+                "canonicalurl": "https://en.wikipedia.org/wiki/Kraven_the_Hunter_(Ana_Kravinoff)"
+            },
+            "44266606": {
+                "pageid": 44266606,
+                "ns": 0,
+                "title": "Mimosciadella",
+                "contentmodel": "wikitext",
+                "pagelanguage": "en",
+                "pagelanguagehtmlcode": "en",
+                "pagelanguagedir": "ltr",
+                "touched": "2021-01-17T09:21:20Z",
+                "lastrevid": 904157707,
+                "length": 831,
+                "fullurl": "https://en.wikipedia.org/wiki/Mimosciadella",
+                "editurl": "https://en.wikipedia.org/w/index.php?title=Mimosciadella&action=edit",
+                "canonicalurl": "https://en.wikipedia.org/wiki/Mimosciadella"
+            }
+        }
+    }
+}
