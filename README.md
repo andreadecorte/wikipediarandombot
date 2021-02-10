@@ -8,4 +8,14 @@ A Telegram bot showing random Wikipedia articles
 * [gabs](github.com/Jeffail/gabs)
 
 # How to use
-export TELEGRAM_TOKEN="yourBotToken"
+```
+    export TELEGRAM_TOKEN="yourBotToken"
+```
+
+## Webhook
+Define the following three environment variables
+```
+    WEBHOOK
+    PORT
+    PUBLIC_URL
+```

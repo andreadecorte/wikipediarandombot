@@ -11,8 +11,8 @@ import (
 func main() {
 
 	var (
-		use_webhook           = false
 		verbose               = true
+		use_webhook           = os.Getenv("WEBHOOK")
 		port                  = os.Getenv("PORT")
 		publicURL             = os.Getenv("PUBLIC_URL")
 		tg_token              = os.Getenv("TELEGRAM_TOKEN")
@@ -26,7 +26,7 @@ func main() {
 
 	poller = &tb.LongPoller{Timeout: 10 * time.Second}
 	// Webhook needs a public URL
-	if use_webhook == true && publicURL != "" {
+	if use_webhook != "" && publicURL != "" {
 		log.Info("Using webhook")
 		poller = webhook
 	}
@@ -46,7 +46,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if use_webhook == false {
+	if use_webhook == "" {
 		// If we switch from webhook to poller
 		// we may need to delete the webhook
 		b.RemoveWebhook()
@@ -59,6 +59,7 @@ func main() {
 
 	b.Handle("/help", h.OnHelp)
 	b.Handle("/start", h.OnHelp)
+	b.Handle("/random", h.OnRandom)
 
 	//b.Handle(tb.OnText, h.OnText)
 	//b.Handle(tb.OnQuery, h.OnInlineQuery)

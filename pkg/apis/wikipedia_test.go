@@ -59,4 +59,7 @@ func TestParsing(t *testing.T) {
 		t.Fatalf("Error parsing title, got %s", pages.Items[1].Title)
 	}
 
+	if pages.Items[1].Fullurl != "https://en.wikipedia.org/wiki/Mimosciadella" {
+		t.Fatalf("Error parsing URL, got %s", pages.Items[1].Fullurl)
+	}
 }
