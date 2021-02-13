@@ -56,10 +56,10 @@ func main() {
 		Bot: b,
 	})
 
-
 	b.Handle("/help", h.OnHelp)
 	b.Handle("/start", h.OnHelp)
 	b.Handle("/random", h.OnRandom)
+	b.Handle("/randomlang", h.OnRandomLang)
 
 	//b.Handle(tb.OnText, h.OnText)
 	//b.Handle(tb.OnQuery, h.OnInlineQuery)
