@@ -20,7 +20,7 @@ type WikiPage struct {
 }
 
 func (p WikiPage) String() string {
-	return fmt.Sprintf("%9.f:%s (%g)", p.Pageid, p.Title, p.Length)
+	return fmt.Sprintf("%9.f:%s (%d)", p.Pageid, p.Title, int(p.Length))
 }
 
 type Pages struct {

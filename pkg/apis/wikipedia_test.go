@@ -29,7 +29,7 @@ func TestSwitchLang(t *testing.T) {
 	err := GetWiki(&pages, lang, howMany)
 	if err != nil {
 		t.Fatalf("Error: %s", err)
-	}	
+	}
 	if len(pages.Items) != howMany {
 		t.Fatalf("We should return %d pages", howMany)
 	}
@@ -52,14 +52,20 @@ func TestParsing(t *testing.T) {
 	if err2 != nil {
 		t.Fatalf("Error parsing json: %s", err2)
 	}
-	if pages.Items[0].Length != 9352 {
+	// Order is not guaranteed
+	position := 0
+	if pages.Items[1].Title != "Mimosciadella" {
+		if pages.Items[0].Title != "Mimosciadella" {
+			t.Fatalf("Error parsing title, got %s", pages.Items[0].Title)
+		} else {
+			position = 1
+		}
+	}
+	if pages.Items[position].Length != 9352 {
 		t.Fatalf("Error parsing length, got %f", pages.Items[0].Length)
 	}
-	if pages.Items[1].Title != "Mimosciadella" {
-		t.Fatalf("Error parsing title, got %s", pages.Items[1].Title)
-	}
 
-	if pages.Items[1].Fullurl != "https://en.wikipedia.org/wiki/Mimosciadella" {
+	if pages.Items[position^1].Fullurl != "https://en.wikipedia.org/wiki/Mimosciadella" {
 		t.Fatalf("Error parsing URL, got %s", pages.Items[1].Fullurl)
 	}
 }
