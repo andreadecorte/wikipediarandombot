@@ -77,7 +77,7 @@ func parseJson(jsonInput []byte, out *Pages) error {
 	return nil
 }
 
-func GetWiki(out *Pages, lang string, limit int) error {
+func GetRandomWikiPages(out *Pages, lang string, limit int) error {
 	uri := fmt.Sprintf("https://%s.wikipedia.org/w/api.php?action=query&format=json&prop=info&inprop=url&generator=random&redirects=1&grnnamespace=0&grnlimit=%d", lang, limit)
 	body, _, _ := getConnection(uri)
 	err := parseJson(body, out)

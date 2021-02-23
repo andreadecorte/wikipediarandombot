@@ -61,7 +61,7 @@ func main() {
 	b.Handle("/random", h.OnRandom)
 	b.Handle("/randomlang", h.OnRandomLang)
 
-	//b.Handle(tb.OnText, h.OnText)
+	b.Handle(tb.OnText, h.OnHelp)
 	//b.Handle(tb.OnQuery, h.OnInlineQuery)
 
 	log.Info("Start bot")
