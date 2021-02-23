@@ -11,7 +11,8 @@ func (h Handler) OnRandom(m *tb.Message) {
 	var pages apis.Pages
 	howMany := 2
 	lang := "en"
-	err := apis.GetWiki(&pages, lang, howMany)
+	err := apis.GetRandomWikiPages(&pages, lang, howMany)
+	apis.ComputeReadingTime(&pages)
 	h.sendMessage(m.Chat, &pages, err)
 }
 
@@ -27,7 +28,8 @@ func (h Handler) OnRandomLang(m *tb.Message) {
 			return
 		}
 		lang := m.Payload
-		err = apis.GetWiki(&pages, lang, howMany)
+		err = apis.GetRandomWikiPages(&pages, lang, howMany)
+		apis.ComputeReadingTime(&pages)
 		h.sendMessage(m.Chat, &pages, err)
 	}
 }
@@ -38,7 +40,7 @@ func (h Handler) sendMessage(chat *tb.Chat, pages *apis.Pages, err error) {
 		return
 	}
 	for _, page := range pages.Items {
-		result := fmt.Sprintf("%s (%d) <a href=\"%s\">link</a>\n", page.Title, int(page.Length), page.Fullurl)
+		result := fmt.Sprintf("%s (%d - %d minutes read) <a href=\"%s\">link</a>\n", page.Title, int(page.Length), int(page.TimeToRead), page.Fullurl)
 		h.b.Send(chat, result)
 	}
 }

@@ -1,5 +1,5 @@
 # wikipediarandombot
-A Telegram bot showing random Wikipedia articles
+A Telegram bot showing random Wikipedia articles in different languages
 
 # Dependencies
 * Golang 1.15
@@ -19,3 +19,6 @@ Define the following three environment variables
     PORT
     PUBLIC_URL
 ```
+
+# Deployment
+[@wikipediarandombot](https://telegram.me/wikipediarandombot)

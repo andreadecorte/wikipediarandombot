@@ -17,10 +17,11 @@ type WikiPage struct {
 	Lastrevid            int       `json:"lastrevid"`
 	Length               float64   `json:"length"`
 	Fullurl              string    `json:"fullurl"`
+	TimeToRead           int
 }
 
 func (p WikiPage) String() string {
-	return fmt.Sprintf("%9.f:%s (%d)", p.Pageid, p.Title, int(p.Length))
+	return fmt.Sprintf("%9.f:%s (%d - %d minutes read)", p.Pageid, p.Title, int(p.Length), int(p.TimeToRead))
 }
 
 type Pages struct {

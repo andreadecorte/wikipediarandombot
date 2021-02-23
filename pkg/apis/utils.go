@@ -4,6 +4,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	"io/ioutil"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -20,7 +21,7 @@ func getConnection(uri string) ([]byte, int, error) {
 	if err != nil {
 		return nil, res.StatusCode, err
 	}
-
+	log.Info("HTTP request: " + req.URL.String())
 	log.Info("HTTP result: " + res.Status)
 
 	if res.Body != nil {
@@ -33,4 +34,19 @@ func getConnection(uri string) ([]byte, int, error) {
 	}
 
 	return body, res.StatusCode, nil
+}
+
+func wordCount(page string) int {
+	words := strings.Fields(page)
+	return len(words)
+}
+
+func timeToRead(words int) int {
+	// Average 250 words per minute
+	minutes := words / 250
+	// at least 1 minute
+	if minutes < 1 {
+		return 1
+	}
+	return minutes
 }

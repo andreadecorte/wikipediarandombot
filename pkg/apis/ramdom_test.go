@@ -11,7 +11,7 @@ func TestHowManyPages(t *testing.T) {
 	var pages Pages
 	howMany := 1
 	lang := "en"
-	err := GetWiki(&pages, lang, howMany)
+	err := GetRandomWikiPages(&pages, lang, howMany)
 	if err != nil {
 		t.Fatalf("Error: %s", err)
 	}
@@ -26,7 +26,7 @@ func TestSwitchLang(t *testing.T) {
 	var pages Pages
 	howMany := 2
 	lang := "fur"
-	err := GetWiki(&pages, lang, howMany)
+	err := GetRandomWikiPages(&pages, lang, howMany)
 	if err != nil {
 		t.Fatalf("Error: %s", err)
 	}
