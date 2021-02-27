@@ -6,7 +6,7 @@ go 1.16
 
 require (
 	github.com/Jeffail/gabs/v2 v2.6.0
-	github.com/sirupsen/logrus v1.7.0
+	github.com/sirupsen/logrus v1.8.0
 	golang.org/x/text v0.3.5
 	gopkg.in/tucnak/telebot.v2 v2.3.5
 )
