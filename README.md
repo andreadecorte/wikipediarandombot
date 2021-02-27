@@ -2,7 +2,7 @@
 A Telegram bot showing random Wikipedia articles in different languages
 
 # Dependencies
-* Golang 1.15
+* Golang latest
 * [telebot](https://github.com/tucnak/telebot)
 * [logrus](https://github.com/sirupsen/logrus)
 * [gabs](github.com/Jeffail/gabs)
