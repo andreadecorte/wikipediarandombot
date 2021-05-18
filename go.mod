@@ -5,7 +5,7 @@ module github.com/klenje/wikipediarandombot
 go 1.16
 
 require (
-	github.com/Jeffail/gabs/v2 v2.6.0
+	github.com/Jeffail/gabs/v2 v2.6.1
 	github.com/sirupsen/logrus v1.8.1
 	golang.org/x/text v0.3.6
 	gopkg.in/tucnak/telebot.v2 v2.3.5
