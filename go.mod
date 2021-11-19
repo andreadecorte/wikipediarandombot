@@ -8,7 +8,7 @@ require (
 	github.com/Jeffail/gabs/v2 v2.6.1
 	github.com/sirupsen/logrus v1.8.1
 	golang.org/x/text v0.3.7
-	gopkg.in/tucnak/telebot.v2 v2.4.0
+	gopkg.in/tucnak/telebot.v2 v2.4.1
 )
 
 require (
