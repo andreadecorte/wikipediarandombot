@@ -3,9 +3,10 @@ package apis
 import (
 	"errors"
 	"fmt"
+	"net/url"
+
 	"github.com/Jeffail/gabs/v2"
 	log "github.com/sirupsen/logrus"
-	"net/url"
 )
 
 func parseJsonPage(jsonInput []byte) (error, string) {
@@ -17,7 +18,7 @@ func parseJsonPage(jsonInput []byte) (error, string) {
 	for _, v := range jsonParsed.Path("query.pages").ChildrenMap() {
 		val := v.ChildrenMap()["extract"].Data()
 		if val == nil {
-			return errors.New("Missing field extract"), ""
+			return errors.New("missing field extract"), ""
 		}
 		log.Debug(val)
 		return nil, val.(string)

@@ -1,11 +1,12 @@
 package apis
 
 import (
-	log "github.com/sirupsen/logrus"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func getConnection(uri string) ([]byte, int, error) {
@@ -28,7 +29,7 @@ func getConnection(uri string) ([]byte, int, error) {
 		defer res.Body.Close()
 	}
 
-	body, readErr := ioutil.ReadAll(res.Body)
+	body, readErr := io.ReadAll(res.Body)
 	if readErr != nil {
 		return nil, 0, readErr
 	}

@@ -21,7 +21,7 @@ type WikiPage struct {
 }
 
 func (p WikiPage) String() string {
-	return fmt.Sprintf("%9.f:%s (%d - %d minutes read)", p.Pageid, p.Title, int(p.Length), int(p.TimeToRead))
+	return fmt.Sprintf("%9.f:%s (%d - %d minutes read)", p.Pageid, p.Title, int(p.Length), p.TimeToRead)
 }
 
 type Pages struct {

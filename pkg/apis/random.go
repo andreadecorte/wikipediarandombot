@@ -3,8 +3,9 @@ package apis
 import (
 	"errors"
 	"fmt"
-	"github.com/Jeffail/gabs/v2"
 	"time"
+
+	"github.com/Jeffail/gabs/v2"
 )
 
 func getField(v *gabs.Container, key string) (interface{}, error) {
