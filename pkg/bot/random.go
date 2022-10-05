@@ -6,7 +6,7 @@ import (
 	"golang.org/x/text/language"
 	tb "gopkg.in/tucnak/telebot.v2"
 
-	"github.com/andreadecorte/wikipediarandombot/pkg/apis"
+	"wikipediarandombot/pkg/apis"
 )
 
 func (h Handler) OnRandom(m *tb.Message) {

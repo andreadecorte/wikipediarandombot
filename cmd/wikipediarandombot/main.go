@@ -6,7 +6,8 @@ import (
 
 	tb "gopkg.in/tucnak/telebot.v2"
 
-	"github.com/andreadecorte/wikipediarandombot/pkg/bot"
+	"wikipediarandombot/pkg/bot"
+
 	log "github.com/sirupsen/logrus"
 )
 
