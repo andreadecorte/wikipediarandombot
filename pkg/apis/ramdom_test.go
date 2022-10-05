@@ -1,7 +1,7 @@
 package apis
 
 import (
-	"io/ioutil"
+	"os"
 	"testing"
 )
 
@@ -43,7 +43,7 @@ func TestSwitchLang(t *testing.T) {
 // parsing of the results
 func TestParsing(t *testing.T) {
 	testFile := "_testdata/test1.json"
-	b, err := ioutil.ReadFile(testFile)
+	b, err := os.ReadFile(testFile)
 	if err != nil {
 		t.Fatalf("Error opening the file %s", testFile)
 	}

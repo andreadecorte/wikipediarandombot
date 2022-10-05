@@ -1,22 +1,24 @@
 package main
 
 import (
-	bot "github.com/klenje/wikipediarandombot/pkg/bot"
-	log "github.com/sirupsen/logrus"
-	tb "gopkg.in/tucnak/telebot.v2"
 	"os"
 	"time"
+
+	tb "gopkg.in/tucnak/telebot.v2"
+
+	"github.com/andreadecorte/wikipediarandombot/pkg/bot"
+	log "github.com/sirupsen/logrus"
 )
 
 func main() {
 
 	var (
-		verbose               = true
-		use_webhook           = os.Getenv("WEBHOOK")
-		port                  = os.Getenv("PORT")
-		publicURL             = os.Getenv("PUBLIC_URL")
-		tg_token              = os.Getenv("TELEGRAM_TOKEN")
-		poller      tb.Poller = nil
+		verbose              = true
+		useWebhook           = os.Getenv("WEBHOOK")
+		port                 = os.Getenv("PORT")
+		publicURL            = os.Getenv("PUBLIC_URL")
+		tgToken              = os.Getenv("TELEGRAM_TOKEN")
+		poller     tb.Poller = nil
 	)
 
 	webhook := &tb.Webhook{
@@ -26,17 +28,17 @@ func main() {
 
 	poller = &tb.LongPoller{Timeout: 10 * time.Second}
 	// Webhook needs a public URL
-	if use_webhook != "" && publicURL != "" {
+	if useWebhook != "" && publicURL != "" {
 		log.Info("Using webhook")
 		poller = webhook
 	}
 
-	if tg_token == "" {
+	if tgToken == "" {
 		log.Fatal("Telegram token missing, check README")
 	}
 
 	b, err := tb.NewBot(tb.Settings{
-		Token:     tg_token,
+		Token:     tgToken,
 		Poller:    poller,
 		Verbose:   verbose,
 		ParseMode: tb.ModeHTML,
@@ -46,7 +48,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if use_webhook == "" {
+	if useWebhook == "" {
 		// If we switch from webhook to poller
 		// we may need to delete the webhook
 		b.RemoveWebhook()

@@ -1,7 +1,7 @@
 package apis
 
 import (
-	"io/ioutil"
+	"os"
 	"strings"
 	"testing"
 )
@@ -10,7 +10,7 @@ import (
 // parsing of the results
 func TestParsingPage(t *testing.T) {
 	testFile := "_testdata/fulltext.json"
-	b, err := ioutil.ReadFile(testFile)
+	b, err := os.ReadFile(testFile)
 	if err != nil {
 		t.Fatalf("Error opening the file %s", testFile)
 	}
@@ -27,7 +27,7 @@ func TestParsingPage(t *testing.T) {
 		t.Fatalf("Count error: %d", count)
 	}
 
-	words := wordCount(result) 
+	words := wordCount(result)
 	if words != 8076 {
 		t.Fatalf("Count error: %d", words)
 	}

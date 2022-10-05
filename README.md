@@ -5,7 +5,7 @@ A Telegram bot showing random Wikipedia articles in different languages
 * Golang latest
 * [telebot](https://github.com/tucnak/telebot)
 * [logrus](https://github.com/sirupsen/logrus)
-* [gabs](github.com/Jeffail/gabs)
+* [gabs](https://github.com/Jeffail/gabs)
 
 # How to use
 ```

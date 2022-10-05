@@ -2,9 +2,11 @@ package bot
 
 import (
 	"fmt"
-	apis "github.com/klenje/wikipediarandombot/pkg/apis"
+
 	"golang.org/x/text/language"
 	tb "gopkg.in/tucnak/telebot.v2"
+
+	"github.com/andreadecorte/wikipediarandombot/pkg/apis"
 )
 
 func (h Handler) OnRandom(m *tb.Message) {
