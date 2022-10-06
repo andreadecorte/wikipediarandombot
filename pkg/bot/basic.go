@@ -1,15 +1,15 @@
 package bot
 
 import (
-	tb "gopkg.in/tucnak/telebot.v2"
+	tele "gopkg.in/telebot.v3"
 )
 
-func (h Handler) OnHelp(m *tb.Message) {
+func OnHelp(c tele.Context) error {
 	HelpText := `
 	<i>Welcome!</i>
 	How to use:
 	<b>/random</b>
 	<b>/randomlang langcode</b>
 	`
-	h.b.Send(m.Chat, HelpText)
+	return c.Send(HelpText)
 }

@@ -19,4 +19,3 @@ func TestReadingTime2(t *testing.T) {
 		t.Fatalf("We should return 3, not %d minutes", minutes)
 	}
 }
-
