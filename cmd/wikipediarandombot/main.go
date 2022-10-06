@@ -4,7 +4,7 @@ import (
 	"os"
 	"time"
 
-	tb "gopkg.in/tucnak/telebot.v2"
+	tele "gopkg.in/telebot.v3"
 
 	"wikipediarandombot/pkg/bot"
 
@@ -14,20 +14,20 @@ import (
 func main() {
 
 	var (
-		verbose              = true
-		useWebhook           = os.Getenv("WEBHOOK")
-		port                 = os.Getenv("PORT")
-		publicURL            = os.Getenv("PUBLIC_URL")
-		tgToken              = os.Getenv("TELEGRAM_TOKEN")
-		poller     tb.Poller = nil
+		verbose                = true
+		useWebhook             = os.Getenv("WEBHOOK")
+		port                   = os.Getenv("PORT")
+		publicURL              = os.Getenv("PUBLIC_URL")
+		tgToken                = os.Getenv("TELEGRAM_TOKEN")
+		poller     tele.Poller = nil
 	)
 
-	webhook := &tb.Webhook{
+	webhook := &tele.Webhook{
 		Listen:   ":" + port,
-		Endpoint: &tb.WebhookEndpoint{PublicURL: publicURL},
+		Endpoint: &tele.WebhookEndpoint{PublicURL: publicURL},
 	}
 
-	poller = &tb.LongPoller{Timeout: 10 * time.Second}
+	poller = &tele.LongPoller{Timeout: 10 * time.Second}
 	// Webhook needs a public URL
 	if useWebhook != "" && publicURL != "" {
 		log.Info("Using webhook")
@@ -38,11 +38,11 @@ func main() {
 		log.Fatal("Telegram token missing, check README")
 	}
 
-	b, err := tb.NewBot(tb.Settings{
+	b, err := tele.NewBot(tele.Settings{
 		Token:     tgToken,
 		Poller:    poller,
 		Verbose:   verbose,
-		ParseMode: tb.ModeHTML,
+		ParseMode: tele.ModeHTML,
 	})
 
 	if err != nil {
@@ -55,17 +55,13 @@ func main() {
 		b.RemoveWebhook()
 	}
 
-	h := bot.New(bot.Config{
-		Bot: b,
-	})
+	b.Handle("/help", bot.OnHelp)
+	b.Handle("/start", bot.OnHelp)
+	b.Handle("/random", bot.OnRandom)
+	b.Handle("/randomlang", bot.OnRandomLang)
 
-	b.Handle("/help", h.OnHelp)
-	b.Handle("/start", h.OnHelp)
-	b.Handle("/random", h.OnRandom)
-	b.Handle("/randomlang", h.OnRandomLang)
-
-	b.Handle(tb.OnText, h.OnHelp)
-	//b.Handle(tb.OnQuery, h.OnInlineQuery)
+	b.Handle(tele.OnText, bot.OnHelp)
+	//b.Handle(tele.OnQuery, h.OnInlineQuery)
 
 	log.Info("Start bot")
 	b.Start()

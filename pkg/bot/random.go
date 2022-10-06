@@ -4,45 +4,56 @@ import (
 	"fmt"
 
 	"golang.org/x/text/language"
-	tb "gopkg.in/tucnak/telebot.v2"
+	tele "gopkg.in/telebot.v3"
 
 	"wikipediarandombot/pkg/apis"
 )
 
-func (h Handler) OnRandom(m *tb.Message) {
+func OnRandom(c tele.Context) (err error) {
 	var pages apis.Pages
 	howMany := 2
 	lang := "en"
-	err := apis.GetRandomWikiPages(&pages, lang, howMany)
-	apis.ComputeReadingTime(&pages)
-	h.sendMessage(m.Chat, &pages, err)
-}
-
-func (h Handler) OnRandomLang(m *tb.Message) {
-	if m.Payload == "" {
-		h.b.Send(m.Chat, "Please choose a valid Wikipedia language code (e.g. fr)")
-	} else {
-		var pages apis.Pages
-		howMany := 2
-		_, err := language.Parse(m.Payload)
-		if err != nil {
-			h.b.Send(m.Chat, "Invalid language: "+m.Payload)
-			return
-		}
-		lang := m.Payload
-		err = apis.GetRandomWikiPages(&pages, lang, howMany)
-		apis.ComputeReadingTime(&pages)
-		h.sendMessage(m.Chat, &pages, err)
-	}
-}
-
-func (h Handler) sendMessage(chat *tb.Chat, pages *apis.Pages, err error) {
+	err = apis.GetRandomWikiPages(&pages, lang, howMany)
 	if err != nil {
-		h.b.Send(chat, err)
 		return
 	}
+	err = apis.ComputeReadingTime(&pages)
+	if err != nil {
+		return
+	}
+	sendMessage(c, &pages)
+	return
+}
+
+func OnRandomLang(c tele.Context) (err error) {
+	if c.Message().Payload == "" {
+		c.Send("Please choose a valid Wikipedia language code (e.g. fr)")
+		return
+	}
+
+	var pages apis.Pages
+	howMany := 2
+	_, err = language.Parse(c.Message().Payload)
+	if err != nil {
+		c.Send("Invalid language: " + c.Message().Payload)
+		return
+	}
+	lang := c.Message().Payload
+	err = apis.GetRandomWikiPages(&pages, lang, howMany)
+	if err != nil {
+		return
+	}
+	err = apis.ComputeReadingTime(&pages)
+	if err != nil {
+		return
+	}
+	sendMessage(c, &pages)
+	return
+}
+
+func sendMessage(c tele.Context, pages *apis.Pages) {
 	for _, page := range pages.Items {
-		result := fmt.Sprintf("%s (%d - %d minutes read) <a href=\"%s\">link</a>\n", page.Title, int(page.Length), int(page.TimeToRead), page.Fullurl)
-		h.b.Send(chat, result)
+		result := fmt.Sprintf("%s (%d - %d minutes read) <a href=\"%s\">link</a>\n", page.Title, int(page.Length), page.TimeToRead, page.Fullurl)
+		c.Send(result)
 	}
 }
